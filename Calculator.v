@@ -203,6 +203,160 @@ module project(
 
 
 
+//TESTBENCH
+// Code your testbench here
+// or browse Examples
+module project_sim();
+  reg reset;
+  reg [4:0] arithmetic;
+  reg sel1, sel2, sel3, sel4;
+  wire [15:0] displayed_number;
+  reg clock_100Mhz;
+  reg [26:0] one_tick_counter;
+  reg [15:0] temp1;
+  reg [15:0] temp2;
+  reg [15:0] temp3;
+  reg [15:0] tempwhole;
+  reg negative;
+  reg one_digit;
+  reg [3:0] i;
+  
+  project uut(.reset(reset), .arithmetic(arithmetic), .sel1(sel1), .sel2(sel2), .sel3(sel3), .sel4(sel4), .displayed_number(displayed_number), .clock_100Mhz(clock_100Mhz), .one_tick_counter(one_tick_counter), .temp1(temp1), .temp2(temp2), .temp3(temp3), .tempwhole(tempwhole), .negative(negative), .one_digit(one_digit));
+
+  initial begin
+  	$dumpfile("dump.vcd");
+    $dumpvars(1);
+  end
+  
+  initial begin
+    reset = 0;
+    arithmetic[2] = 0;
+    arithmetic[4] = 0;
+    sel1 = 0;
+    sel2 = 0;
+    sel3 = 0;
+    sel4 = 0;
+    #1000;
+    reset = 1;
+    #1000;
+    reset = 0;
+    #1000;
+    clock_100Mhz = 0;
+    #1000;
+    clock_100Mhz = 1;
+    #1000
+    for(i = 0; i < 9; i++) begin
+    	sel1 = 1;
+      	#5;
+      	sel1 = 0;
+      	#5;
+    end
+    for(i = 0; i < 9; i++) begin
+    	sel2 = 1;
+      	#5;
+      	sel2 = 0;
+      	#5;
+    end
+    for(i = 0; i < 9; i++) begin
+    	sel3 = 1;
+      	#5;
+      	sel3 = 0;
+      	#5;
+    end
+    for(i = 0; i < 9; i++) begin
+    	sel4 = 1;
+      	#5;
+      	sel4 = 0;
+      	#5;
+    end
+    for(i = 1; i < 5; i++) begin
+      arithmetic[i] = 1;
+      #5;
+      arithmetic[i] = 0;
+      #10;
+      arithmetic[0] = 1; //Return original numbers
+      #5;
+      arithmetic[0] = 0;
+      #10;
+    end
+    #100;
+    for(i = 0; i < 9; i++) begin
+    	sel1 = 1;
+      	#5;
+      	sel1 = 0;
+      	#5;
+    end
+    #10;
+    arithmetic[3] = 1;
+    #5;
+    arithmetic[3] = 0;
+    #10;
+    arithmetic[0] = 1;
+    #5;
+    arithmetic[0] = 0;
+    #10;
+    arithmetic[1] = 1;
+    #5;
+    arithmetic[1] = 0;
+    #10;
+    arithmetic[0] = 1;
+    #5;
+    arithmetic[0] = 0;
+    #100;
+    for(i = 0; i < 3; i++) begin
+    	sel3 = 1;
+      	#5;
+      	sel3 = 0;
+      	#5;
+    end
+    for(i = 0; i < 4; i++) begin
+    	sel4 = 1;
+      	#5;
+      	sel4 = 0;
+      	#5;
+    end
+    #10;
+    arithmetic[3] = 1;
+    #5;
+    arithmetic[3] = 0;
+    #10;
+    arithmetic[0] = 1;
+    #5;
+    arithmetic[0] = 0;
+    #10;
+    arithmetic[2] = 1;
+    #5;
+    arithmetic[2] = 0;
+    #10;
+    arithmetic[0] = 1;
+    #5;
+    arithmetic[0] = 0;
+    #10;
+    arithmetic[1] = 1;
+    #5;
+    arithmetic[1] = 0;
+    #10;
+    arithmetic[0] = 1;
+    #5;
+    arithmetic[0] = 0;
+    for(i = 0; i < 2; i++) begin
+    	sel2 = 1;
+      	#5;
+      	sel2 = 0;
+      	#5;
+    end
+    for(i = 0; i < 2; i++) begin
+    	sel1 = 1;
+      	#5;
+      	sel1 = 0;
+      	#5;
+    end
+    #100;
+    arithmetic[1] = 1;
+    #5;
+    arithmetic[1] = 0;
+  end
+  endmodule
 
 
 
